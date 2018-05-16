@@ -3,7 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-go/ for more details
 defaults:
   defaults: &defaults
-    working_directory: '/go/src/github.com/multicloudsolutions/cloudy
+    working_directory: '/go/src/github.com/multicloudsolutions/cloudy'
 
 version: 2
 general:
