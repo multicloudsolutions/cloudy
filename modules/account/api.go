@@ -25,17 +25,30 @@ func Create(w http.ResponseWriter, r *http.Request) {
 
 // GetDetails of account by name
 func GetDetails(w http.ResponseWriter, r *http.Request) {
-	accountDetails := GetAccount(r.URL.Query().Get("name"))
-	fmt.Fprintf(w, accountDetails)
+	var ac Account
+	accountName := r.URL.Query().Get("name")
+	(&ac).GetAccount(accountName)
+	res, _ := json.Marshal(ac)
+	fmt.Fprintf(w, string(res))
 }
 
 // Update account details
-func Update(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Account updated successfully")
-}
-
-//Remove account
-func Remove(w http.ResponseWriter, r *http.Request) {
-	status := RemoveAccount(r.URL.Query().Get("name"))
-	fmt.Fprintf(w, status)
-}
+//func Update(w http.ResponseWriter, r *http.Request) {
+//	accountDecoder := json.NewDecoder(r.Body)
+//	var accData Account
+//	err := accountDecoder.Decode(&accData)
+//	if err != nil {
+//		panic(err)
+//	}
+//	if err != nil {
+//		log.Fatalln("error:", err)
+//	}
+//	accData.UpdateAccount()
+//	fmt.Fprintf(w, "Account updated successfully")
+//}
+//
+////Remove account
+//func Remove(w http.ResponseWriter, r *http.Request) {
+//	status := RemoveAccount(r.URL.Query().Get("name"))
+//	fmt.Fprintf(w, status)
+//}
