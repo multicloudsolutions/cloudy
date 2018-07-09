@@ -1,23 +1,23 @@
 package main
 
+// This is a test comment
+
 import (
-        "fmt"
-        "net/http"
-        "github.com/multicloudsolutions/cloudy/modules/account"
-        "github.com/jinzhu/gorm"
+	"fmt"
+	"github.com/jinzhu/gorm"
+	"github.com/multicloudsolutions/cloudy/modules/account"
+	"net/http"
 )
 
-
-
 func main() {
-        db, err := gorm.Open("mysql", "test:test@/test?charset=utf8&parseTime=True&loc=Local")
-        if err != nil {
-            fmt.Print(err)
-        }
+	db, err := gorm.Open("mysql", "test:test@/test?charset=utf8&parseTime=True&loc=Local")
+	if err != nil {
+		fmt.Print(err)
+	}
 	db.AutoMigrate(&account.Account{})
 	db.Close()
 
-        accountRouter := account.Router()
-        http.Handle("/account", accountRouter)
-        http.ListenAndServe(":8080", accountRouter)
+	accountRouter := account.Router()
+	http.Handle("/account", accountRouter)
+	http.ListenAndServe(":8080", accountRouter)
 }
