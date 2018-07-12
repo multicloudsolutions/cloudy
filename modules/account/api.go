@@ -47,8 +47,11 @@ func GetDetails(w http.ResponseWriter, r *http.Request) {
 //	fmt.Fprintf(w, "Account updated successfully")
 //}
 //
-////Remove account
-//func Remove(w http.ResponseWriter, r *http.Request) {
-//	status := RemoveAccount(r.URL.Query().Get("name"))
-//	fmt.Fprintf(w, status)
-//}
+
+//Remove account
+func Remove(w http.ResponseWriter, r *http.Request) {
+	var ac Account
+	accountName := r.URL.Query().Get("name")
+	status := (&ac).RemoveAccount(accountName)
+	fmt.Fprintf(w, status)
+}

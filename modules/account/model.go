@@ -35,16 +35,13 @@ func (ac *Account) CreateAccount() string {
 }
 
 // RemoveAccount by name
-//func RemoveAccount(name string) string {
-//	db, err := gorm.Open("mysql", "test:test@/test?charset=utf8&parseTime=True&loc=Local")
-//	if err != nil {
-//		fmt.Print(err)
-//	}
-//	defer db.Close()
-//	db.Where("name = ?", name).Delete(&Account{})
-//	return "Deleted account"
-//}
-//
+func (ac *Account) RemoveAccount(name string) string {
+	var dbHandler utils.DBHandler
+	(&dbHandler).GetConn()
+	dbHandler.Db.Where("name = ?", name).Delete(&Account{})
+	return "Deleted account"
+}
+
 //// UpdateAccount updates account details
 //func (acc Account) UpdateAccount() string {
 //	db, err := gorm.Open("mysql", "test:test@/test?charset=utf8&parseTime=True&loc=Local")
