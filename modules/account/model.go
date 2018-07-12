@@ -38,18 +38,16 @@ func (ac *Account) CreateAccount() string {
 func (ac *Account) RemoveAccount(name string) string {
 	var dbHandler utils.DBHandler
 	(&dbHandler).GetConn()
+	defer dbHandler.Db.Close()
 	dbHandler.Db.Where("name = ?", name).Delete(&Account{})
 	return "Deleted account"
 }
 
-//// UpdateAccount updates account details
-//func (acc Account) UpdateAccount() string {
-//	db, err := gorm.Open("mysql", "test:test@/test?charset=utf8&parseTime=True&loc=Local")
-//	if err != nil {
-//		fmt.Print(err)
-//	}
-//	defer db.Close()
-//	result := GetAccount(acc.name)
-//	db.Model(&Account{}).Updates(acc)
-//	return "Updated account"
-//}
+// UpdateAccount updates account details
+func (ac *Account) UpdateAccount() string {
+	var dbHandler utils.DBHandler
+	(&dbHandler).GetConn()
+	defer dbHandler.Db.Close()
+	(dbHandler.Db).Model(&ac).Updates(&ac)
+	return "Updated account"
+}

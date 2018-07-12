@@ -14,9 +14,6 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	var accData Account
 	err := accountDecoder.Decode(&accData)
 	if err != nil {
-		panic(err)
-	}
-	if err != nil {
 		log.Fatalln("error:", err)
 	}
 	accData.CreateAccount()
@@ -33,20 +30,16 @@ func GetDetails(w http.ResponseWriter, r *http.Request) {
 }
 
 // Update account details
-//func Update(w http.ResponseWriter, r *http.Request) {
-//	accountDecoder := json.NewDecoder(r.Body)
-//	var accData Account
-//	err := accountDecoder.Decode(&accData)
-//	if err != nil {
-//		panic(err)
-//	}
-//	if err != nil {
-//		log.Fatalln("error:", err)
-//	}
-//	accData.UpdateAccount()
-//	fmt.Fprintf(w, "Account updated successfully")
-//}
-//
+func Update(w http.ResponseWriter, r *http.Request) {
+	accountDecoder := json.NewDecoder(r.Body)
+	var ac Account
+	err := accountDecoder.Decode(&ac)
+	if err != nil {
+		log.Fatalln("error:", err)
+	}
+	(&ac).UpdateAccount()
+	fmt.Fprintf(w, "Account updated successfully")
+}
 
 //Remove account
 func Remove(w http.ResponseWriter, r *http.Request) {

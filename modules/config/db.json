@@ -1,6 +1,6 @@
 {
     "db_name": "test",
     "db_username": "test",
-    "db_password": "test"
-
+    "db_password": "test",
+    "db_type": "mysql"
 }

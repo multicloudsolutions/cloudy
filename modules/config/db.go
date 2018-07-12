@@ -10,6 +10,7 @@ type DBConfig struct {
 	DBName     string `json:"db_name"`
 	DBPassword string `json:"db_password"`
 	DBUsername string `json:"db_username"`
+	DBType     string `json:"db_type"`
 }
 
 // GetConfig to get dabase config

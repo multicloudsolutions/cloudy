@@ -7,9 +7,9 @@ import (
 // Router for /account
 func Router() *mux.Router {
 	accountSubRouter := mux.NewRouter().PathPrefix("/account").Subrouter()
-	accountSubRouter.HandleFunc("/create", Create).Methods("POST")
-	accountSubRouter.HandleFunc("/read", GetDetails).Methods("GET")
-	//	accountSubRouter.HandleFunc("/update", Update).Methods("PUT")
-	//	accountSubRouter.HandleFunc("/delete", Remove).Methods("DELETE")
+	accountSubRouter.HandleFunc("/", Create).Methods("POST")
+	accountSubRouter.HandleFunc("/", GetDetails).Methods("GET")
+	accountSubRouter.HandleFunc("/", Update).Methods("PUT")
+	accountSubRouter.HandleFunc("/", Remove).Methods("DELETE")
 	return accountSubRouter
 }
