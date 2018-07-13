@@ -1,20 +1,23 @@
 package main
 
-import (
-        "log"
-        "net/http"
-        "github.com/go-sql-driver/mysql"
-        "database/sql"
-        "github.com/multicloudsolutions/cloudy/modules"
+// This is a test comment
 
+import (
+	"fmt"
+	"github.com/jinzhu/gorm"
+	"github.com/multicloudsolutions/cloudy/modules/account"
+	"net/http"
 )
 
 func main() {
-        db, err := sql.Open("mysql", "test:test@/test?charset=utf8")
-        if err != nil {
-                log.Fatal(err)
-        }
-        a := ac.AccountHandler{Db: db}
-        http.Handle("/account", &a)
-        http.ListenAndServe(":8080", nil)
+	db, err := gorm.Open("mysql", "test:test@/test?charset=utf8&parseTime=True&loc=Local")
+	if err != nil {
+		fmt.Print(err)
+	}
+	db.AutoMigrate(&account.Account{})
+	db.Close()
+
+	accountRouter := account.Router()
+	http.Handle("/account", accountRouter)
+	http.ListenAndServe(":8080", accountRouter)
 }
